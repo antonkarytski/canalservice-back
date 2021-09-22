@@ -32,7 +32,7 @@ app.use((err: any, req: any, res: any) => {
   res.render("error");
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`App started ${PORT}`));
 
 module.exports = app;

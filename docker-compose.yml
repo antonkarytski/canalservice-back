@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
+  nginx:
+    restart: always
+    build:
+      context: nginx
+    ports:
+      - "80:80"
   postgres:
     image: postgres
     environment:
@@ -12,7 +18,7 @@ services:
       - canalservice-db:/var/lib/postgresql/data
   canalservice:
     build:
-      context: .
+      context: app
       dockerfile: Dockerfile
       target: base
     environment:
@@ -24,8 +30,8 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./src:/home/node/app/src
-      - ./nodemon.json:/home/node/app/nodemon.json
+      - ./app/src:/home/node/app/src
+      - ./app/nodemon.json:/home/node/app/nodemon.json
     container_name: canalservice
     expose:
       - '5000'
